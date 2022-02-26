@@ -81,8 +81,14 @@ const Navbar = () => {
         <NavbarContainer>
           <Logo src={logoPath} alt="logo" onClick={() => navigate("/")} />
           <Links>
-            <Link href="#">Home</Link>
-            <Link href="#">About</Link>
+            <Link href="/">Home</Link>
+            <Link
+              href="https://github.com/TheNinza/rick-and-morty-infinite-scroll"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              About
+            </Link>
           </Links>
         </NavbarContainer>
       </NavbarComponent>

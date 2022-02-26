@@ -23,12 +23,32 @@ const HeroSection = styled.div`
   display: flex;
   gap: 6rem;
   justify-content: space-evenly;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.lg}px) {
+    gap: 4rem;
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.md}px) {
+    flex-direction: column;
+    gap: 2rem;
+  }
 `;
 
 const CharacterImage = styled.img`
   height: 25rem;
   width: auto;
   border-radius: 1rem;
+  object-fit: cover;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.lg}px) {
+    height: auto;
+    width: 40%;
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.md}px) {
+    width: 80%;
+    margin: auto;
+  }
 `;
 
 const CharacterBasicInfo = styled.div`
