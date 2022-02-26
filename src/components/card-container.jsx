@@ -49,7 +49,7 @@ const GET_LIST = gql`
 `;
 
 const CardContainerComponent = ({ page }) => {
-  const { updateLastPage } = useContext(LastScrollAndPageContext);
+  const { updateLastPage, lastPage } = useContext(LastScrollAndPageContext);
   const containerRef = useRef(null);
 
   const { data, error, loading } = useQuery(GET_LIST, {
@@ -68,15 +68,17 @@ const CardContainerComponent = ({ page }) => {
     if (!nextPage) return;
 
     const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        updateLastPage(nextPage);
-        // stop observing once we've loaded the next page
-        observer.disconnect(container);
+      console.log(entries);
+      if (entries[0].isIntersecting && entries[0].boundingClientRect.y > 0) {
+        updateLastPage(Math.max(nextPage, lastPage));
+        observer.disconnect();
       }
     });
 
     observer.observe(container);
-  }, [nextPage]);
+
+    return () => observer.disconnect();
+  }, [nextPage, lastPage, updateLastPage]);
 
   if (loading)
     return (
